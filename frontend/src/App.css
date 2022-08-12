@@ -1,0 +1,10 @@
+html, #root{
+  background-color: #e2e2e2!important;
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box ;
+}
+
+.estadistica_font_size{
+  font-size: 22px;
+}
