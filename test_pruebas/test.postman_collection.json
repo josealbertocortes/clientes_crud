@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "9d582a94-f3e2-43fa-8671-27bda06e0b45",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create_client",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n      \"name\": \"vi\",\n    \"lastname\": \"cel\",\n    \"email\": \"vi@gmail.com\",\n    \"telephone\": \"55411795354\",\n    \"age\": \"18\",\n    \"status\": \"not_interested\"\n    }\n\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.01:8000/api/clients/",
+					"host": [
+						"127",
+						"0",
+						"01"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"clients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_client",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n      \"name\": \"test\",\n    \"lastname\": \"last_test\",\n    \"email\": \"test@gmail.com\",\n    \"telephone\": \"5511223344\",\n    \"age\": \"18\",\n    \"status\": \"not_interested\"\n    }\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/clients/2/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"clients",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_client",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.01:8000/api/clients/4/",
+					"host": [
+						"127",
+						"0",
+						"01"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"clients",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_clients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.01:8000/api/clients/",
+					"host": [
+						"127",
+						"0",
+						"01"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"clients",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

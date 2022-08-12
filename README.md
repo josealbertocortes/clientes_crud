@@ -56,11 +56,7 @@ Ejecutar lo sigueintes comandos
 
 `npm start`
 
-### Notas
 
-las urls que se pueden visitar es:
-
-http://localhost:3000 Se encuentra el listado de clientes, se pueden agregar clientes y editar los existentes
 
 ### Conexión con mysql
 
@@ -99,3 +95,12 @@ En el archivo de backend/backend/setting.py cambiar el siguiente codigo
 |PASSWORD   |  	Esta clave almacena la contraseña de esa cuenta MySQL. |
 |HOST| 	Esta clave almacena la dirección IP en la que está alojada su base de datos MySQL.  |
 |  PORT | 	Esta clave almacena el número de puerto en el que está alojada su base de datos MySQL.  |
+
+
+### Notas
+
+las urls que se pueden visitar es:
+
+http://localhost:3000 Se encuentra el listado de clientes, se pueden agregar clientes y editar los existentes
+
+Se agregan una coleción  de pruebas en postman para la api
