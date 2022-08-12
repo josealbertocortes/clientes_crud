@@ -3,10 +3,14 @@
 ### Prerequisitos
 
 Para seguir correctamente los pasos, es recomendable realizar la prueba en un sistema UNIX
+
 Django maneja un ORM, la configuracion a la base de datos para una prueba rápida se puede usar sqlite
+
 Se dejara el ejemplo por si se desea realizar la conexión a la base de datos mysql 
+
 Si se desea trabajar con mysql, por favor realizar este paso antes del paso 4
-Tener instalado virtualenv
+
+Tener instalado virtualenv o un manejor de ambite virtual 
 
 ### Paso 1 Crear un ambiente virtual
 
