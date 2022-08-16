@@ -2,47 +2,50 @@
 
 ### Prerequisitos
 
-Para seguir correctamente los pasos, es recomendable realizar la prueba en un sistema UNIX
+Tener instalado docker y node
 
-Django maneja un ORM, la configuracion a la base de datos para una prueba rápida se puede usar sqlite
-
-Se dejara el ejemplo por si se desea realizar la conexión a la base de datos mysql 
-
-Si se desea trabajar con mysql, por favor realizar este paso antes del paso 4
-
-Tener instalado virtualenv o un manejor de ambite virtual 
-
-### Paso 1 Crear un ambiente virtual
+### Entrar a la carpeta django-mysql
 
 En una terminal ejecutar el siguiente comando
 
-`virtualenv env`
+`docker-compose build`
 
-### Paso 2 Activar el ambiente virutal
+Una  vez terminado ejecutar el siguiente comando 
 
-En una terminal ejecutar el siguiente comando
+`docker-compose up -d`
 
-`source env/bin/activate`
+Para corroborar que el proceso haya finalizado de manera adecuada ejecutar el siguiente comando 
 
-### Paso 3 Instalar dependencias
+`docker logs django-mysql_mysql_1`
 
-Una vez que el ambiente este activado ejecutar el siguiente comando
+hasta recibir una respuesta como la siguiente podremos continuar 
 
-`pip install -r requirements.txt`
+    2022-08-16T00:00:05.544503Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+    2022-08-16T00:00:05.698997Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+    2022-08-16T00:00:05.760546Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
+    2022-08-16T00:00:05.760639Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.30'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
 
-### Paso 4 ejecutar el back
+Una vez obtenida la respuesta anterior ejecutar el sigueinte comand 
 
-En la misma  terminal ejecutar los siguientes comandos, para correr el back
+`docker restart django-mysql_web_1`
 
-`cd backend`
+##### Ejecutar las migraciones 
 
-`python manage.py makemigrations`
+Para ejecutar las migraciones dentro del contenedor realizaremos los siguientes comandos 
 
-`python manage.py migrate`
+`docker exec -t -i django-mysql_web_1 /bin/bash`
 
-`python manage.py runserver`
 
-### Paso 5 Instalar dependecias del front
+`cd backend/`
+
+`python manage.py makemigrations clients`
+
+`python manage.py migrate `
+
+Una vez terminado el proceso de las migraciones podemos cerrarla terminal 
+
+
+### Paso 2 Instalar dependecias del front
 
 Abrir una terminal y ejecutar lo sigueintes comandos
 
@@ -58,49 +61,13 @@ Ejecutar lo sigueintes comandos
 
 
 
-### Conexión con mysql
+### Notas 
+Se pueden cambiar las variables de entoro en el documento de docker-compose que se encuentra en 
+django-mysql/docker-compose.yml, recordar que deben tener lo mismos valores para el servicio web y el de base de deatos 
 
-Es necesario tener instalado en la maquina mysql o una conexión externa 
-Si se desea trabajar con mysql, por favor realizar este paso antes del paso 4
+- MYSQL_ROOT_PASSWORD=S3cret
+- MYSQL_PASSWORD=abc123qwe
+- MYSQL_USER=client
+- MYSQL_DATABASE=backdata
+- SECRET_KET=ASDD1245FSADF1Q235HYSUFQ8GA4Y6
 
-instalar la siguiente dependencia
-
-`pip install mysqlclient`
-
-En el archivo de backend/backend/setting.py cambiar el siguiente codigo
-
-    Anterior
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
-    Nuevo
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'databaseName',
-            'USER': 'databaseUser',
-            'PASSWORD': 'databasePassword',
-            'HOST': 'localhost',
-            'PORT': 'portNumber',
-        }
-    }
-
-|   NAME |  Esta clave almacena el nombre de su base de datos MySQL. |
-| ------------ | ------------ |
-| USER | 	Esta clave almacena el nombre de usuario de su cuenta MySQL mediante el cual se conectará la base de datos MySQL. |
-|PASSWORD   |  	Esta clave almacena la contraseña de esa cuenta MySQL. |
-|HOST| 	Esta clave almacena la dirección IP en la que está alojada su base de datos MySQL.  |
-|  PORT | 	Esta clave almacena el número de puerto en el que está alojada su base de datos MySQL.  |
-
-
-### Notas
-
-las urls que se pueden visitar es:
-
-http://localhost:3000 Se encuentra el listado de clientes, se pueden agregar clientes y editar los existentes
-
-Se agregan una coleción  de pruebas en postman para la api

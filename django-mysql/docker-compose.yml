@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    volumes:
+      - ~/apps/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=S3cret
+      - MYSQL_PASSWORD=abc123qwe
+      - MYSQL_USER=client
+      - MYSQL_DATABASE=backdata
+    volumes:
+      - ~/apps/mysql:/var/lib/mysql
+
+
+  web:
+    build: .
+    command: python backend/manage.py runserver 0.0.0.0:8000
+    environment:
+      - MYSQL_PASSWORD=abc123qwe
+      - MYSQL_USER=client
+      - MYSQL_DATABASE=backdata
+      - SECRET_KET=ASDD1245FSADF1Q235HYSUFQ8GA4Y6
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    links:
+      - mysql
